@@ -35,14 +35,21 @@ TST2,email2@email.com; email3@email.com
 
 ## Instructions for Using the Program
 
-Instructions for Using the Program once Configuration is Complete
+Once Configuration is Complete
+
 You can run it for all: https://yourdomain.com/index.php?lib=ALL
-Or just one institution: https://yourdomain.com/index.php?lib=TST (with TST is the institution code)
+
+Or just one institution: https://yourdomain.com/index.php?lib=TST 
+
+(with TST is the institution code)
+
 
 You will have 2 options:
 
 Option 1: Upload the NZ report
+
 Since some data doesn’t come through the API, to be as complete as possible, run and download this report for NZ electronic collections:
+
 •	Log in to the network zone
 •	Search with * for Electronic collection
 •	Export
@@ -50,6 +57,7 @@ Since some data doesn’t come through the API, to be as complete as possible, r
 You probably want to rename the file with the date for uploading: nzalloct5.xls
 
 Option 2: Using API to get NZ electronic collection:
+
 You can also run the program using only the API (without uploading the report) if you want to quickly get major electronic collections.
 
 Once the program processes, click the link at the top to download the zip file of the reports or click who you want to email.
