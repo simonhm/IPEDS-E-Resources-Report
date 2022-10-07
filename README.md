@@ -51,7 +51,9 @@ Option 1: Upload the NZ report
 Since some data doesn’t come through the API, to be as complete as possible, run and download this report for NZ electronic collections:
 
 •	Log in to the network zone
+
 •	Search with * for Electronic collection
+
 •	Export
 
 You probably want to rename the file with the date for uploading: nzalloct5.xls
