@@ -7,7 +7,7 @@ PALS staff discussed this project at Eluna Learns 2022: (https://el-una.org/meet
 
 ## Requirements
 
-This program requires a PHP Hosting: for running this PHP web-based program 
+PHP Hosting: for running this PHP web-based program 
 
 ## Installation
 
