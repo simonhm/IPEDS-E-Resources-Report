@@ -26,7 +26,7 @@ TST2 = 111222333apikey2
 
 
 ### emails.csv
-Edit this file to provide the list of emails to receive reports.
+Edit this file to provide the list of emails to receive reports when you run this program for ALL.
 
 For example:
 
