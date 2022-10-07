@@ -18,14 +18,19 @@ Download and upload all files and folders into your hosting.
 Edit this file to provide API key for each institutions as below fomat:
 
 [API key: lib_code = api_key]
+
 ALL = 123xyz
+
 TST = 111222333
+
 
 ### emails.csv
 Edit this file to provide the list of emails to receive reports.
+
 For example:
 
 TST1,email1@email.com
+
 TST2,email2@email.com; email3@email.com
 
 ## Instructions for Using the Program
