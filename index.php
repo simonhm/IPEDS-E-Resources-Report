@@ -213,6 +213,7 @@ function get_2ending_chars(string $s){
         error_log("IPEDS for $lib", 0);
  
       $api_key = @$config[$lib];
+      $api_key_nz = @$config['NZ'];
 
       if ($api_key == "") {
         echo "The LIB code ". $lib . " hasn't been installed on this application yet.<br>";
@@ -354,7 +355,6 @@ function get_2ending_chars(string $s){
 
 	if (@$_GET["nzalma_api"] == "yes") {
 
-	$api_key_nz = "l7xx942cdd83c7794ac5893def464cc4aa9d";
         $url_nz = "https://api-na.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections?apikey=$api_key_nz&limit=100";
         $htm_nz = my_curl($url_nz);
         $xml_nz = new SimpleXMLElement($htm_nz);
