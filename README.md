@@ -49,7 +49,7 @@ Then you have 2 options:
 
 Option 1: Upload the NZ report
 
-Since some data doesn’t come through the API, to be as complete as possible, run and download this report for NZ electronic collections:
+Since some data (groups) doesn’t come through the API, to be as complete as possible, run and download this report for NZ electronic collections:
 
 •	Log in to the network zone
 
