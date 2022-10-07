@@ -44,7 +44,8 @@ Or just one institution: https://yourdomain.com/index.php?lib=TST
 (with TST is the institution code)
 
 
-You will have 2 options:
+
+Then you have 2 options:
 
 Option 1: Upload the NZ report
 
