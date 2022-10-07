@@ -574,7 +574,7 @@ function get_2ending_chars(string $s){
 	}
 
         // Get NZ E-Resources Analytics Report
-        $url_nz_rp = "https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=l7xx942cdd83c7794ac5893def464cc4aa9d&limit=1000&path=%2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2FJill%2Fnz-itemsjan27-allinst";
+        $url_nz_rp = "https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=$api_key_nz&limit=1000&path=%2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2FJill%2Fnz-itemsjan27-allinst";
         $htm_nz_rp = my_curl($url_nz_rp);
         $xml_nz_rp = new SimpleXMLElement($htm_nz_rp);
 
@@ -866,7 +866,6 @@ function get_2ending_chars(string $s){
 
       } // action = "process"
       elseif (@$_GET["action"] == "email") {
-	      //$to = "jill.holman@mnsu.edu";
 
 	      // send all checked libs
 	      if (isset($_POST['email_libs'])) {
@@ -877,15 +876,15 @@ function get_2ending_chars(string $s){
 			      //echo $lib_code . ": " . $email . "<br>";
 			      $to = $email;
                 	      $subject = "IPEDS Report for " . $lib_code . " on " .date('M d, Y'); 
-			      $message = "There is an IPEDS report for " . $lib_code . ": <a href=https://qbooking.mnpals.net/iped/logs/" . $lib_code . "-eres-" . date("dMY") . ".xls>click here</a> to download.";
-			      $headers = 'From: IPEDS Report <noreply@qbooking.mnpals.net>' . "\n";
+			      $message = "There is an IPEDS report for " . $lib_code . ": <a href=https://yourdomain.com/logs/" . $lib_code . "-eres-" . date("dMY") . ".xls>click here</a> to download.";
+			      $headers = 'From: IPEDS Report <noreply@yourdomain.com>' . "\n";
 
               		      // BCC
               		      //$headers .= "Bcc: simon.mai@mnsu.edu\r\n";
 
 		              $headers .= 'MIME-Version: 1.0' . "\n";
         		      $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-              		      $returnpath = '-f noreply@qbooking.mnpals.net';
+              		      $returnpath = '-f noreply@yourdomain.com';
 
            		      if (mail($to,$subject,$message,$headers, $returnpath)) echo "Report was sent to " . $lib_code . ": " . $email . "<br>";
           		      else echo "Failed (" . $lib_code . ": " . $email . ")<br>";
@@ -896,11 +895,11 @@ function get_2ending_chars(string $s){
 	      //$to = "master.simon21@yahoo.com";
 	      $subject = "IPEDS Report for " . $_GET["lib"] . " on " .date('M d, Y');
 	      if ($_GET["lib"] == "ALL") {
-		      $message = "There is an IPEDS report for " . $_GET["lib"] . ": <a href=https://qbooking.mnpals.net/iped/logs/" . $_GET["lib"] . "-eres-" . date("dMY") . ".zip>click here</a> to download.";
+		      $message = "There is an IPEDS report for " . $_GET["lib"] . ": <a href=https://yourdomain.com/iped/logs/" . $_GET["lib"] . "-eres-" . date("dMY") . ".zip>click here</a> to download.";
 	      } else {
-	      	$message = "There is an IPEDS report for " . $_GET["lib"] . ": <a href=https://qbooking.mnpals.net/iped/logs/" . $_GET["lib"] . "-eres-" . date("dMY") . ".xls>click here</a> to download.";
+	      	$message = "There is an IPEDS report for " . $_GET["lib"] . ": <a href=https://yourdomain.com/iped/logs/" . $_GET["lib"] . "-eres-" . date("dMY") . ".xls>click here</a> to download.";
 	      }
-	      $headers = 'From: IPEDS Report <noreply@qbooking.mnpals.net>' . "\n";
+	      $headers = 'From: IPEDS Report <noreply@yourdomain.com>' . "\n";
 
 	      // BCC
   	      $headers .= "Bcc: simon.mai@mnsu.edu\r\n";
@@ -908,7 +907,7 @@ function get_2ending_chars(string $s){
 
 	      $headers .= 'MIME-Version: 1.0' . "\n";
   	      $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-  	      $returnpath = '-f noreply@qbooking.mnpals.net';
+  	      $returnpath = '-f noreply@yourdomain.com';
 		
 	      if ($_GET["lib"] == "ALL") {
   	   	if (mail($to,$subject,$message,$headers, $returnpath)) echo "All Reports was sent.";
