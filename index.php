@@ -880,7 +880,7 @@ function get_2ending_chars(string $s){
 			      $headers = 'From: IPEDS Report <noreply@yourdomain.com>' . "\n";
 
               		      // BCC
-              		      //$headers .= "Bcc: simon.mai@mnsu.edu\r\n";
+              		      //$headers .= "Bcc: your_email@your_email.com\r\n";
 
 		              $headers .= 'MIME-Version: 1.0' . "\n";
         		      $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -891,8 +891,9 @@ function get_2ending_chars(string $s){
 		      }
 	      }
 
-	      $to = "jill.holman@mnsu.edu";
-	      //$to = "master.simon21@yahoo.com";
+	      // send your email
+	      $to = "your_email@your_email.com";
+
 	      $subject = "IPEDS Report for " . $_GET["lib"] . " on " .date('M d, Y');
 	      if ($_GET["lib"] == "ALL") {
 		      $message = "There is an IPEDS report for " . $_GET["lib"] . ": <a href=https://yourdomain.com/iped/logs/" . $_GET["lib"] . "-eres-" . date("dMY") . ".zip>click here</a> to download.";
@@ -902,7 +903,7 @@ function get_2ending_chars(string $s){
 	      $headers = 'From: IPEDS Report <noreply@yourdomain.com>' . "\n";
 
 	      // BCC
-  	      $headers .= "Bcc: simon.mai@mnsu.edu\r\n";
+  	      $headers .= "Bcc: your_email@your_email.com\r\n";
 
 
 	      $headers .= 'MIME-Version: 1.0' . "\n";
