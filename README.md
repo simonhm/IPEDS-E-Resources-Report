@@ -42,7 +42,7 @@ You can run it for all: https://yourdomain.com/index.php?lib=ALL
 
 Or just one institution: https://yourdomain.com/index.php?lib=TST1
 
-(with TST is the institution code)
+(with TST1 is the institution code)
 
 
 
