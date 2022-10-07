@@ -18,11 +18,11 @@ Download and upload all files and folders into your hosting.
 ### config.ini
 Edit this file to provide API key for each institutions as below fomat:
 
-[API key: lib_code = api_key]
+[lib_code = api_key]
 
-ALL = 123xyz
+TST1 = 123xyzapikey1
 
-TST = 111222333
+TST2 = 111222333apikey2
 
 
 ### emails.csv
