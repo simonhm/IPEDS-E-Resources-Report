@@ -70,7 +70,7 @@ Once the program processes, click the link at the top to download the zip file o
 
 ## TO DO
 
-* Improving the API option: check and get electronic collections' GROUPS under services combining with GROUPS under CDI. For now, the program is only getting electronic collections' GROUPS under CDI.
+* Improving the API option: check and get electronic collections' GROUPS under services combining with GROUPS under CDI. For now, the program is getting electronic collections' GROUPS under CDI.
 
 ## Maintainers/Sponsors
 
