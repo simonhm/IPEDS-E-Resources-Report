@@ -20,11 +20,13 @@ Edit this file to provide API key for network zone (NZ) and each institution zon
 
 [lib_code = api_key]
 
-> NZ = 111_api_key_of_network_zone
->
-> TST1 = 123xyzapikey1
->
-> TST2 = 111222333apikey2
+```
+NZ = 111_api_key_of_network_zone
+
+TST1 = 123xyzapikey1
+
+TST2 = 111222333apikey2
+```
 
 
 ### emails.csv
@@ -32,9 +34,11 @@ Edit this file to provide the list of emails to receive reports when you run thi
 
 For example:
 
-> TST1,email1@email.com
-> 
-> TST2,email2@email.com; email3@email.com
+```
+TST1,email1@email.com
+ 
+TST2,email2@email.com; email3@email.com
+```
 
 ## Instructions for Using the Program
 
@@ -74,11 +78,15 @@ This program uses these API calls to receive NZ and IZ analytics reports:
 
 NZ analytics report (replace 111222333_api_key_nz_111222333 with your network zone api key)
 
->  https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=111222333_api_key_nz_111222333&limit=1000&path=%2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2FJill%2Fnz-itemsjan27-allinst
+```
+https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=111222333_api_key_nz_111222333&limit=1000&path=%2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2FJill%2Fnz-itemsjan27-allinst
+```
 
 IZ analytics report (replace 111222333_api_key_111222333 with your institution zone api key)
 
-> https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=111222333_api_key_111222333&limit=1000&path=%2Fshared%2FCommunity%2FReports%2FConsortia%2FMNPALS%2FWork%20in%20Process%2FIZitemsjan27
+```
+https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=111222333_api_key_111222333&limit=1000&path=%2Fshared%2FCommunity%2FReports%2FConsortia%2FMNPALS%2FWork%20in%20Process%2FIZitemsjan27
+```
 
 If you want to use your own reports, you must update the paths for your API calls in the program at:  
 
