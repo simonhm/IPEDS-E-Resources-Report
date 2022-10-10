@@ -20,6 +20,8 @@ Edit this file to provide API key for each institutions as below fomat:
 
 [lib_code = api_key]
 
+NZ = 111_api_key_of_network_zone
+
 TST1 = 123xyzapikey1
 
 TST2 = 111222333apikey2
@@ -48,19 +50,19 @@ Or just one institution: https://yourdomain.com/index.php?lib=TST1
 
 Then you have 2 options:
 
-* Option 1: Upload the NZ report
+### Option 1: Upload the NZ report
 
 Since some data (groups) doesn’t come through the API, to be as complete as possible, run and download this report for NZ electronic collections:
 
-•	Log in to the network zone
+*	Log in to the network zone
 
-•	Search with * for Electronic collection
+*	Search with * for Electronic collection
 
-•	Export
+*	Export
 
 You probably want to rename the file with the date for uploading: nzalloct5.xls
 
-* Option 2: Using API to get NZ electronic collection:
+### Option 2: Using API to get NZ electronic collection:
 
 You can also run the program using only the API (without uploading the report) if you want to quickly get major electronic collections.
 
