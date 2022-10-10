@@ -16,7 +16,7 @@ Download and upload all files and folders into your hosting.
 ## Configuration
 
 ### config.ini
-Edit this file to provide API key for each institutions as below fomat:
+Edit this file to provide API key for network zone (NZ) and each institutions as below fomat:
 
 [lib_code = api_key]
 
