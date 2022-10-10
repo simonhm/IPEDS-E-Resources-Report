@@ -1,7 +1,7 @@
 # IPEDS E Resources Report
 
 ## Introduction
-This program combines information from both NZ and IZ, for both Alma and Alma Analytics. Looking at the resulting combined spreadsheet helps to see concerns and get better e-resources counts for IPEDS. We can see duplicates and what is missing and then make adjustments as needed.
+This program combines information from both Network Zone (NZ) and Institution Zone (IZ), for both Alma and Alma Analytics. Looking at the resulting combined spreadsheet helps to see concerns and get better e-resources counts for IPEDS. We can see duplicates and what is missing and then make adjustments as needed.
 
 PALS staff discussed this project at Eluna Learns 2022: (https://el-una.org/meetings/eluna-learns-2022/eluna-learns-2022-eresources/)
 
@@ -16,7 +16,7 @@ Download and upload all files and folders into your hosting.
 ## Configuration
 
 ### config.ini
-Edit this file to provide API key for network zone (NZ) and each institutions as below fomat:
+Edit this file to provide API key for network zone (NZ) and each institutions (IZ) as below fomat:
 
 [lib_code = api_key]
 
