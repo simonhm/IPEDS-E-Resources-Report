@@ -20,11 +20,11 @@ Edit this file to provide API key for network zone (NZ) and each institutions as
 
 [lib_code = api_key]
 
-NZ = 111_api_key_of_network_zone
-
-TST1 = 123xyzapikey1
-
-TST2 = 111222333apikey2
+> NZ = 111_api_key_of_network_zone
+>
+> TST1 = 123xyzapikey1
+>
+> TST2 = 111222333apikey2
 
 
 ### emails.csv
@@ -33,6 +33,7 @@ Edit this file to provide the list of emails to receive reports when you run thi
 For example:
 
 > TST1,email1@email.com
+> 
 > TST2,email2@email.com; email3@email.com
 
 ## Instructions for Using the Program
