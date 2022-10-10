@@ -68,6 +68,16 @@ You can also run the program using only the API (without uploading the report) i
 
 Once the program processes, click the link at the top to download the zip file of the reports or click who you want to email.
 
+### Notes
+
+This program uses these API calls to receive NZ and IZ analytics reports:
+
+NZ analytics report:
+
+>  https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=111222333_api_key_nz_111222333&limit=1000&path=%2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2FJill%2Fnz-itemsjan27-allinst";
+
+111222333_api_key_nz_111222333: your network zone api key
+
 ## TO DO
 
 * Improving the API option: check and get electronic collections' GROUPS under services combining with GROUPS under CDI. For now, the program is getting electronic collections' GROUPS under CDI.
