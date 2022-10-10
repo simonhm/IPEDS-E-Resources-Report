@@ -72,11 +72,13 @@ Once the program processes, click the link at the top to download the zip file o
 
 This program uses these API calls to receive NZ and IZ analytics reports:
 
-NZ analytics report:
+NZ analytics report (111222333_api_key_nz_111222333: your network zone's api key)
 
->  https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=111222333_api_key_nz_111222333&limit=1000&path=%2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2FJill%2Fnz-itemsjan27-allinst";
+>  https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=111222333_api_key_nz_111222333&limit=1000&path=%2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2FJill%2Fnz-itemsjan27-allinst
 
-111222333_api_key_nz_111222333: your network zone api key
+IZ analytics report (111222333_api_key_111222333: your institution zone's api key)
+
+> https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=111222333_api_key_111222333&limit=1000&path=%2Fshared%2FCommunity%2FReports%2FConsortia%2FMNPALS%2FWork%20in%20Process%2FIZitemsjan27
 
 ## TO DO
 
