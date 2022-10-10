@@ -80,6 +80,13 @@ IZ analytics report (111222333_api_key_111222333: your institution zone's api ke
 
 > https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=111222333_api_key_111222333&limit=1000&path=%2Fshared%2FCommunity%2FReports%2FConsortia%2FMNPALS%2FWork%20in%20Process%2FIZitemsjan27
 
+These reports are builts and shared by PALS staff at:
+> https://analytics12-naw.alma.exlibrisgroup.com/analytics/saw.dll?Answers&path=%2Fshared%2FCommunity%2FReports%2FConsortia%2FMNPALS%2FWork%20in%20Process%2FIZitemsjan27
+
+> https://analytics12-naw.alma.exlibrisgroup.com/analytics/saw.dll?Answers&path=%2Fshared%2FCommunity%2FReports%2FConsortia%2FMNPALS%2FWork%20in%20Process%2FIZitemsjan27
+
+If you want to use your own reports, you must update the paths for your API calls in the program, and ofc you need to customize the program for them.
+
 ## TO DO
 
 * Improving the API option: check and get electronic collections' GROUPS under services combining with GROUPS under CDI. For now, the program is getting electronic collections' GROUPS under CDI.
