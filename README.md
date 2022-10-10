@@ -85,7 +85,9 @@ These reports are builts and shared by PALS staff at:
 
 > https://analytics12-naw.alma.exlibrisgroup.com/analytics/saw.dll?Answers&path=%2Fshared%2FCommunity%2FReports%2FConsortia%2FMNPALS%2FWork%20in%20Process%2FIZitemsjan27
 
-If you want to use your own reports, you must update the paths for your API calls in the program at https://github.com/simonhm/IPEDS-E-Resources-Report/blob/e08dde7908726a33db9c589a3c4f0c2393080eb7/index.php#L577 and https://github.com/simonhm/IPEDS-E-Resources-Report/blob/1923cd350766e20ad4cd73a85732525fe8f13534/index.php#L529, and ofc you need to customize the program for them.
+If you want to use your own reports, you must update the paths for your API calls in the program at https://github.com/simonhm/IPEDS-E-Resources-Report/blob/e08dde7908726a33db9c589a3c4f0c2393080eb7/index.php#L577 and https://github.com/simonhm/IPEDS-E-Resources-Report/blob/1923cd350766e20ad4cd73a85732525fe8f13534/index.php#L529
+
+You may need to customize the program to match with your own counting data and reports.
 
 ## TO DO
 
