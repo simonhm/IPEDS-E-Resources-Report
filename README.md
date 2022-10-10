@@ -32,9 +32,8 @@ Edit this file to provide the list of emails to receive reports when you run thi
 
 For example:
 
-TST1,email1@email.com
-
-TST2,email2@email.com; email3@email.com
+> TST1,email1@email.com
+> TST2,email2@email.com; email3@email.com
 
 ## Instructions for Using the Program
 
