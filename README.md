@@ -101,6 +101,8 @@ https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=11122
 
 If you want to use your own reports, you must update the paths for your API calls in the program at:  
 
+https://github.com/simonhm/IPEDS-E-Resources-Report/blob/9d06ff4ace1dbd27e122c5a35c3c03b864340829/index.php#L569
+
 https://github.com/simonhm/IPEDS-E-Resources-Report/blob/1d2bb709bc25887b2061103e7dbec21f2207e7c6/index.php#L570
 
 and 
