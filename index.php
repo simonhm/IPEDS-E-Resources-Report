@@ -24,12 +24,12 @@
 	 margin-bottom: 5px;
          padding: 4px;
        }
- 
+
        .icon {
          width: 18px;
          height: 18px;
        }
-      
+
        .btn-primary {
          padding: 5px;
        }
@@ -42,7 +42,7 @@
        .floating-label-form-group {
          border: none;
        }
-   
+
        #OCLC {
          display: none;
        }
@@ -67,13 +67,13 @@ function displayOCLC() {
   }
 }
 
-var _validFileExtensions = [".xlsx"];    
+var _validFileExtensions = [".xlsx"];
 function Validate1(oForm) {
     var arrInputs = oForm.getElementsByTagName("input");
     for (var i = 0; i < arrInputs.length; i++) {
         var oInput = arrInputs[i];
         if (oInput.type == "file") {
-            var sFileName = oInput.value;            
+            var sFileName = oInput.value;
             if (sFileName.length > 0) {
                 var blnValid = false;
                 for (var j = 0; j < _validFileExtensions.length; j++) {
@@ -83,7 +83,7 @@ function Validate1(oForm) {
                         break;
                     }
                 }
-                
+
                 if (!blnValid) {
                     alert("Sorry, " + sFileName + " is invalid, allowed extension is: " + _validFileExtensions.join(", "));
                     return false;
@@ -94,7 +94,7 @@ function Validate1(oForm) {
             //}
         }
     }
-   
+
     var elem = document.getElementById('sendMessageButton1');
     elem.disabled=true;
     elem.value='Processing, please wait...';
@@ -197,10 +197,10 @@ function get_2ending_chars(string $s){
   return substr($s, -2);
 }
 
-  if (@$_GET["lib"] == "") { 
+  if (@$_GET["lib"] == "") {
     echo "You need to provide LIBRARY CODE to use this web-based application. For example: <a href=index.php?lib=TST>index.php?lib=TST</a><br>";
     echo "Contact <a href=https://www.mnpals.org>MnPALS</a> for more info";
-    
+
   }
 
     if (@$_GET["lib"] != "") {
@@ -211,9 +211,8 @@ function get_2ending_chars(string $s){
 
  	// log
         error_log("IPEDS for $lib", 0);
- 
+
       $api_key = @$config[$lib];
-      $api_key_nz = @$config['NZ'];
 
       if ($api_key == "") {
         echo "The LIB code ". $lib . " hasn't been installed on this application yet.<br>";
@@ -223,14 +222,14 @@ function get_2ending_chars(string $s){
       }
 
       // Log IPED file
-      $filename = 'logs/' . $lib . "_report.csv";
+      $filename = 'files/' . $lib . "_report.csv";
       if (file_exists($filename)) {
         //echo "The file $filename exists";
       } else {
         //echo "The file $filename does not exist";
         $myfile = fopen($filename, "w") or die("Unable to open file!");
 	fclose($myfile);
-      } 
+      }
 
       if (@$_GET["action"] == "") {
 ?>
@@ -238,14 +237,14 @@ function get_2ending_chars(string $s){
 		<label>Option 1: Use a NZalma Excel file having all NZalma databases</label>
 		  <br><br>
 <?php
-        $nzalma_filename = "logs/nzalma_filename.txt";
+        $nzalma_filename = "files/nzalma_filename.txt";
         $simon = "";
         $simon = @file_get_contents($nzalma_filename);
         if ($simon != "") {
                 $nz = explode("|", $simon);
                 $nz_name = $nz[0];
                 $nz_date = $nz[1];
-                echo "You can use this file <a target=_blank href='logs/$nz_name'>" . $nz_name . "</a> which was uploaded at $nz_date.<br>OR Choose and upload a new excel file to process<br>";
+                echo "You can use this file <a target=_blank href='files/$nz_name'>" . $nz_name . "</a> which was uploaded at $nz_date.<br>OR Choose and upload a new excel file to process<br>";
         }
 ?>
 		  <input type="file" name="Report_File" value=""><br><br>
@@ -262,10 +261,10 @@ function get_2ending_chars(string $s){
           <input id='sendMessageButton2' class='btn btn-primary btn-xl' type='submit' value='Generate E-Resource Analytics Report for <?php echo $lib;?>'>
 	</form>
 <?php
-      }     
+      }
       elseif (@$_GET["action"] == "process") {
 
-	$zipname = 'logs/ALL-eres-' . date("dMY") . '.zip';
+	$zipname = 'files/ALL-eres-' . date("dMY") . '.zip';
 	$zip = new ZipArchive;
 	$zip->open($zipname, ZipArchive::CREATE);
 
@@ -273,8 +272,8 @@ function get_2ending_chars(string $s){
 	if ($lib == "ALL") {
 		$process_all = true;
 		if (!$process_all) {
-			//$lib_array = array("CEN", "SCU", "BSU", "BETHEL");
-			$lib_array = array("TST");
+			$lib_array = array("ACC", "SCU", "BSU", "BETHEL");
+			//$lib_array = array("TST");
 		} else {
 			// Read the email csv file
 			$lib_array = array();
@@ -284,7 +283,9 @@ function get_2ending_chars(string $s){
                         	while (($line = fgets($handle)) !== false) {
                                 	// process the line read.
                                 	$ss = explode(",", $line);
-					$lib_code = $ss[0];
+					$lib_code = trim($ss[0]);
+					// -------- remove the utf-8 BOM ----
+					$lib_code = str_replace("\xEF\xBB\xBF",'',$lib_code);
 					array_push($lib_array, $lib_code);
                         	}
 
@@ -294,7 +295,8 @@ function get_2ending_chars(string $s){
 	}
 	// foreach lib
 	foreach ($lib_array as $i => $value) {
-		$lib = $lib_array[$i];
+
+		$lib = trim($lib_array[$i]);
 		$api_key = @$config[$lib];
 
 	$e_report = array();
@@ -316,7 +318,7 @@ function get_2ending_chars(string $s){
 				foreach ($e_report as $key=>$value) {
                                         if ($value["rs_name"] == $rs_name ) {
                                                 $e_report[$key]["Notes"] = "Warning - Check Duplicate Database in IZalma. | ";
-                                           //echo $value["rs_name"]."<br>";        
+                                           //echo $value["rs_name"]."<br>";
 						break;
 					}
                                 }
@@ -355,17 +357,19 @@ function get_2ending_chars(string $s){
 
 	if (@$_GET["nzalma_api"] == "yes") {
 
+	// Provide API key of network zone here
+	$api_key_nz = "l7xx1111111111111112222222222233333";
         $url_nz = "https://api-na.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections?apikey=$api_key_nz&limit=100";
         $htm_nz = my_curl($url_nz);
         $xml_nz = new SimpleXMLElement($htm_nz);
- 
+
 
 	$max = $xml_nz->attributes()[0];;
 	$offset = 0;
 
         while ($max>0) {
 
-        	foreach ($xml_nz->{'electronic_collection'} as $report) {	
+        	foreach ($xml_nz->{'electronic_collection'} as $report) {
                 $rs_name = trim($report->{'public_name'});
 
 		if (!empty($report->{'cdi_group_settings'})) {
@@ -398,38 +402,9 @@ function get_2ending_chars(string $s){
 					break;
 				}
 			} // foreach
-		} // if !empty 
-		}
+		} // if !empty
+		} // foreach
 
-
-/*
-                if (strpos($c3, $lib) != false) {
-			$c = $c + 1;
-                           		if (in_array($rs_name, $rs_array)) {
-                                                foreach ($e_report as $key=>$value) {
-                                                        if ($value["rs_name"] == $rs_name ) {
-                                                                $e_report[$key]["nzalma"] = "yes";
-                                                                $e_report[$key]["Notes"] = "NZalma | ";
-                                                                break;
-                                                        }
-                                                }
-                                        } else {
-                                                array_push($rs_array, $rs_name);
-                                                array_push($e_report, array(
-                                                        "rs_name" => $rs_name,
-                                                        "nzalma" => "yes",
-                                                        "izalma" => "",
-                                                        "ebooks" => "",
-                                                        "emedia" => "",
-                                                        "eserials" => "",
-                                                        "other" => "",
-                                                        "NZan" => "",
-                                                        "IZan" => "",
-                                                        "Notes" => "NZalma | "));
-                                        }
-		}
-	}
- */
         	if ($max > 0) {
                         $max = $max - 100;
                         $offset = $offset + 100;
@@ -445,18 +420,18 @@ function get_2ending_chars(string $s){
 	} // if ($_FILES["Report_File"] == '')
 	else {
 
-        $nzalma_filename = "logs/nzalma_filename.txt";
+        $nzalma_filename = "files/nzalma_filename.txt";
 	$simon = "";
 	$inputFileName = "";
         $simon = @file_get_contents($nzalma_filename);
         if ($simon != "") {
                 $nz = explode("|", $simon);
-                $inputFileName = "logs/" . $nz[0];
+                $inputFileName = "files/" . $nz[0];
         }
 	if ($_FILES["Report_File"]["name"] != "") {
-		$inputFileName = 'logs/' . $_FILES["Report_File"]["name"];
-		file_put_contents('logs/nzalma_filename.txt', $_FILES["Report_File"]["name"] . "|" . date('Y-m-d H:i:s')); 
-		file_put_contents($inputFileName,  
+		$inputFileName = 'files/' . $_FILES["Report_File"]["name"];
+		file_put_contents('files/nzalma_filename.txt', $_FILES["Report_File"]["name"] . "|" . date('Y-m-d H:i:s'));
+		file_put_contents($inputFileName,
 			file_get_contents($_FILES["Report_File"]["tmp_name"]));
 	}
 
@@ -512,21 +487,38 @@ function get_2ending_chars(string $s){
 	} //else of if $_FILES["Report_File"] == ''
 
         //echo "NZalma ($lib): " . $c . "<br>";
-/*
-        foreach ($e_report as $item) {
-		//var_dump($item);
-	        foreach ($item as $key=>$value) {
-			echo $key;
-			echo "<br><br>";
-		}
-	}
-*/
         $ebooks = 0;
 	$emedia = 0;
 	$eserials = 0;
 	$other = 0;
         // Get IZ E-Resources Analytics Report
-        $url_iz_rp = "https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=$api_key&limit=1000&path=%2Fshared%2FCommunity%2FReports%2FConsortia%2FMNPALS%2FWork%20in%20Process%2FIZitemsjan27";
+	//$url_iz_rp = "https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=$api_key&limit=1000&path=%2Fshared%2FCommunity%2FReports%2FConsortia%2FMNPALS%2FWork%20in%20Process%2FIZitemsjan27";
+
+
+	//$config_path = parse_ini_file('IZan_paths.csv');
+	//$iz_an_path = @$config_path[$lib];
+	// 2023 - Read the IZan path csv file
+                $handle = fopen("IZan_paths.csv", "r");
+		$found_path = false;
+		$izan_path = "";
+                if ($handle) {
+                        while ((($line = fgets($handle)) !== false) and (!$found_path)) {
+                                // process the line read.
+                                $ss = explode(",", $line);
+				$lib_code = trim($ss[0]);
+				if ($lib_code == strtoupper($lib)) {
+					$izan_path = trim($ss[1]);
+					$found_path = true;
+				}
+                        }
+
+                        fclose($handle);
+                }
+
+	$url_iz_rp = "https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=$api_key&limit=1000&path=$izan_path";
+
+        error_log('URL of ' . $lib . ' : ' . $url_iz_rp,0);
+
         $htm_iz_rp = my_curl($url_iz_rp);
 	$xml_iz_rp = new SimpleXMLElement($htm_iz_rp);
 
@@ -552,7 +544,7 @@ function get_2ending_chars(string $s){
 					$found = true;
 					break;
 				}
-		}	
+		}
 		if (!$found) {
 				array_push($rs_array, $rs_name);
 			                if ($c2 == "ebooks") { $ebooks = $ebooks + $c3; $b = $c3; }
@@ -574,7 +566,10 @@ function get_2ending_chars(string $s){
 	}
 
         // Get NZ E-Resources Analytics Report
-        $url_nz_rp = "https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=$api_key_nz&limit=1000&path=%2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2FJill%2Fnz-itemsjan27-allinst";
+	$api_key_nz = "l7xx1111111111111112222222222233333";
+        $nz_rp_path = "%2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2Fnz-items-2023";
+	// %2Fshared%2FMnPALS%20Consortium%20NZ%2001MNPALS_NETWORK%2FPals%2Fnz-items-2023
+	$url_nz_rp = "https://api-na.hosted.exlibrisgroup.com/almaws/v1/analytics/reports?apikey=$api_key_nz&limit=1000&path=$nz_rp_path";
         $htm_nz_rp = my_curl($url_nz_rp);
         $xml_nz_rp = new SimpleXMLElement($htm_nz_rp);
 
@@ -624,7 +619,7 @@ function get_2ending_chars(string $s){
                                         "other" => $o,
                                         "NZan" => "yes",
                                         "IZan" => "",
-                                        "Notes" => "Doesn't show as NZalma, but it is. | "));			
+                                        "Notes" => "Doesn't show as NZalma, but it is. | "));
 			}
 		}
         }
@@ -652,43 +647,11 @@ function get_2ending_chars(string $s){
 
     	array_multisort($sort_rs, SORT_ASC, SORT_NATURAL|SORT_FLAG_CASE, $e_report);
 
-/*
-	foreach ($xml_iz->{'electronic_collection'} as $item) {
-		$rs_name = (string)$item->{'public_name'};
-		$ebooks = "";
-		$emedia = "";
-		$eserials = "";
-		$other = "";
-		$count = 0;
-		
-		foreach ($xml_iz_rp->{'QueryResult'}->{'ResultXml'}->{'rowset'}->{'Row'} as $report) {
-			if ($report->{'Column1'} == $rs_name) {
-				//echo $report->{'Column1'} . " - " . $report->{'Column2'} . " : " . $report->{'Column3'} . "<br>";
-				if ($report->{'Column2'} == 'ebooks') {
-                                	$ebooks = $report->{'Column3'};
-				}
-				if ($report->{'Column2'} == 'emedia') {
-                                        $emedia = $report->{'Column3'};
-				}
-				if ($report->{'Column2'} == 'eserials') {
-                                        $eserials = $report->{'Column3'};
-				}
-				if ($report->{'Column2'} == 'other') {
-                                        $other = $report->{'Column3'};
-                                }
-                	}
-		}
-		//echo "abc " . $xml_iz_rp->{'QueryResult'}->{'ResultXml'}->{'rowset'}->{'Row'}->{'Column1'};
-		//echo $rs_name . "," . $ebooks . "," . $emedia . "," . $eserials . "," . $other . "<br>";
-		fwrite($myfile, '"' . $rs_name . '"' . ',"' . $ebooks . '"' . ',"' . $emedia . '"' . ',"' . $eserials . '"' . ',"' . $other . '"' . "\n");
-	}
- */
- 
 	// Save to file
-        $filename = 'logs/' . $lib . '_report.csv';
+        $filename = 'files/' . $lib . '_report.csv';
         $myfile = fopen($filename, "w") or die("Unable to open file!");
         fwrite($myfile,"Electronic Collection Public Name,NZalma,IZalma,Ebooks,Emedia,Eserials,Other,NZan,IZan,Notes\n");
-	
+
 	foreach ($e_report as $value) {
                 //var_dump($item);
                         //echo $key . ": " . var_dump($value[0]);
@@ -709,17 +672,17 @@ function get_2ending_chars(string $s){
 	// If the files uses an encoding other than UTF-8 or ASCII, then tell the reader
 	//$objReader->setInputEncoding('UTF-16LE');
 
-	$filename_excel = 'logs/' . $lib . '_report.xls';
+	$filename_excel = 'files/' . $lib . '_report.xls';
 	$objPHPExcel = $objReader->load($filename);
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 	$objWriter->save($filename_excel);
-	
+
 
  	// apply background for excel file
 	        //  Read your Excel workbook
 	        //  Read your Excel workbook
 
-	$filename_excel1 = 'logs/' . $lib . '-eres-' . date("dMY") . '.xls';
+	$filename_excel1 = 'files/' . $lib . '-eres-' . date("dMY") . '.xls';
 
 	try {
                 $inputFileType1 = PHPExcel_IOFactory::identify($filename_excel);
@@ -730,7 +693,7 @@ function get_2ending_chars(string $s){
                 die('Error loading file "'.pathinfo($filename_excel,PATHINFO_BASENAME).'": '.$e->getMessage());
         }
 
- 
+
 /*
 	$objPHPExcel1->getActiveSheet()->getStyle('A1:J1')->applyFromArray(
     array(
@@ -743,7 +706,7 @@ function get_2ending_chars(string $s){
  */
 
 	$objPHPExcel1->getActiveSheet()->getStyle('A1:J1')->getFont()->setBold( true );
-	
+
 	$l = $objPHPExcel1->getActiveSheet()->getHighestRow();
 
 	$ll = $l - 1;
@@ -798,7 +761,7 @@ function get_2ending_chars(string $s){
         ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()
         ->setRGB('D9D9D6');
-        
+
 
 	//PHPExcel_Shared_Font::setAutoSizeMethod(PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
 	foreach(range('A','J') as $columnID) {
@@ -814,7 +777,7 @@ function get_2ending_chars(string $s){
 	  		echo $report->{'Column1'} . " - " . $report->{'Column2'} . " : " . $report->{'Column3'} . "<br>";
 		}
       }
-       */      
+       */
 
 	// Add each excel file into ZIP
 	$zip->addFile($filename_excel1);
@@ -852,7 +815,7 @@ function get_2ending_chars(string $s){
                 		echo '<label>' . $lib_code . ': ' . $email . '</label>';
                 		echo '</div>';
     			}
-			
+
     			fclose($handle);
 		}
   		echo '<br><br><input type="submit" value="Send Email">';
@@ -875,41 +838,41 @@ function get_2ending_chars(string $s){
 			      $email = $ss[1];
 			      //echo $lib_code . ": " . $email . "<br>";
 			      $to = $email;
-                	      $subject = "IPEDS Report for " . $lib_code . " on " .date('M d, Y'); 
-			      $message = "There is an IPEDS report for " . $lib_code . ": <a href=https://yourdomain.com/logs/" . $lib_code . "-eres-" . date("dMY") . ".xls>click here</a> to download.";
-			      $headers = 'From: IPEDS Report <noreply@yourdomain.com>' . "\n";
+                	      $subject = "IPEDS Report for " . $lib_code . " on " .date('M d, Y');
+			      $message = "There is an IPEDS report for " . $lib_code . ": <a href=https://your_domain.edu/files/" . $lib_code . "-eres-" . date("dMY") . ".xls>click here</a> to download.";
+			      $headers = 'From: IPEDS Report <noreply@tst.edu>' . "\n";
 
               		      // BCC
-              		      //$headers .= "Bcc: your_email@your_email.com\r\n";
+              		      //$headers .= "Bcc: simon.mai@mnsu.edu\r\n";
 
 		              $headers .= 'MIME-Version: 1.0' . "\n";
         		      $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-              		      $returnpath = '-f noreply@yourdomain.com';
+              		      $returnpath = '-f noreply@tst.edu';
 
            		      if (mail($to,$subject,$message,$headers, $returnpath)) echo "Report was sent to " . $lib_code . ": " . $email . "<br>";
           		      else echo "Failed (" . $lib_code . ": " . $email . ")<br>";
 		      }
 	      }
 
-	      // send your email
-	      $to = "your_email@your_email.com";
-
+        // Default receiver's email
+	      $to = "test1@tst.edu";
+	      //$to = "master.simon21@yahoo.com";
 	      $subject = "IPEDS Report for " . $_GET["lib"] . " on " .date('M d, Y');
 	      if ($_GET["lib"] == "ALL") {
-		      $message = "There is an IPEDS report for " . $_GET["lib"] . ": <a href=https://yourdomain.com/iped/logs/" . $_GET["lib"] . "-eres-" . date("dMY") . ".zip>click here</a> to download.";
+		      $message = "There is an IPEDS report for " . $_GET["lib"] . ": <a href=https://your_domain.edu/files/" . $_GET["lib"] . "-eres-" . date("dMY") . ".zip>click here</a> to download.";
 	      } else {
-	      	$message = "There is an IPEDS report for " . $_GET["lib"] . ": <a href=https://yourdomain.com/iped/logs/" . $_GET["lib"] . "-eres-" . date("dMY") . ".xls>click here</a> to download.";
+	      	$message = "There is an IPEDS report for " . $_GET["lib"] . ": <a href=https://your_domain.edu/files/" . $_GET["lib"] . "-eres-" . date("dMY") . ".xls>click here</a> to download.";
 	      }
-	      $headers = 'From: IPEDS Report <noreply@yourdomain.com>' . "\n";
+	      $headers = 'From: IPEDS Report <noreply@yourdomain.edu>' . "\n";
 
 	      // BCC
-  	      $headers .= "Bcc: your_email@your_email.com\r\n";
+  	      $headers .= "Bcc: simon.mai@mnsu.edu\r\n";
 
 
 	      $headers .= 'MIME-Version: 1.0' . "\n";
   	      $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-  	      $returnpath = '-f noreply@yourdomain.com';
-		
+  	      $returnpath = '-f noreply@yourdomain.edu';
+
 	      if ($_GET["lib"] == "ALL") {
   	   	if (mail($to,$subject,$message,$headers, $returnpath)) echo "All Reports was sent.";
 		        else echo "Failed";
@@ -917,14 +880,14 @@ function get_2ending_chars(string $s){
 	      echo "<br><br><a href=index.php?lib=ALL>Back</a>";
       } // action = email
 
- 
+
     } // if lib != ""
 
 // Detect ALMA widget
 $almaW = false;
 if (@$_SERVER['HTTP_REFERER'] != "") {
   if (strpos($_SERVER['HTTP_REFERER'], "primo.exlibrisgroup") == true) $almaW = true;
-} 
+}
 
 if (!$almaW) {
 ?>
