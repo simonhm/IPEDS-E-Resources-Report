@@ -51,6 +51,13 @@ TST1,%2Fshared%2FTest1%20Library%20blahblahblah%2Fblahblahblah-iz-items-2023
 TST2,%2Fshared%2FTest2%20Library%20blahblahblah%2Fblahblahblah-iz-items-2023
 ```
 
+### index.php
+Edit this file to provide the NZ api key and NZ analytics report's path at:
+
+https://github.com/simonhm/IPEDS-E-Resources-Report/blob/9d06ff4ace1dbd27e122c5a35c3c03b864340829/index.php#L569
+
+https://github.com/simonhm/IPEDS-E-Resources-Report/blob/1d2bb709bc25887b2061103e7dbec21f2207e7c6/index.php#L570
+
 ## Instructions for Using the Program
 
 Once Configuration is Complete
@@ -107,7 +114,9 @@ https://github.com/simonhm/IPEDS-E-Resources-Report/blob/1d2bb709bc25887b2061103
 
 and 
 
-https://github.com/simonhm/IPEDS-E-Resources-Report/blob/1923cd350766e20ad4cd73a85732525fe8f13534/index.php#L529
+```
+all the paths for each institutions in IZan_paths.csv as described above.
+```
 
 If you change the reports, you may need to customize the program.
 
