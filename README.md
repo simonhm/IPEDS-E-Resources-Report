@@ -40,6 +40,17 @@ TST1,email1@email.com
 TST2,email2@email.com; email3@email.com
 ```
 
+### IZan_paths.csv
+Edit this file to provide the list of IZ analytic reports' paths for each institutions
+
+For example:
+
+```
+TST1,%2Fshared%2FTest1%20Library%20blahblahblah%2Fblahblahblah-iz-items-2023
+
+TST2,%2Fshared%2FTest2%20Library%20blahblahblah%2Fblahblahblah-iz-items-2023
+```
+
 ## Instructions for Using the Program
 
 Once Configuration is Complete
