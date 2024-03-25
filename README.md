@@ -120,9 +120,6 @@ all the paths for each institutions in IZan_paths.csv as described above.
 
 If you change the reports, you may need to customize the program.
 
-## TO DO
-
-* Improving the API option: check and get electronic collections' GROUPS under services combining with GROUPS under CDI. For now, the program is getting electronic collections' GROUPS under CDI.
 
 ## Maintainers/Sponsors
 
